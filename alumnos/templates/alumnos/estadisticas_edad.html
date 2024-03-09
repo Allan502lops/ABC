@@ -1,0 +1,42 @@
+{% block content %}
+  <div class="statistics-container">
+    <h1>Estadísticas de Edad</h1>
+    <ul class="statistics-list">
+      {% for estadistica in estadisticas %}
+        <li>{{ estadistica.total }} alumnos nacido en {{ estadistica.fecha_nacimiento__year }}</li>
+      {% endfor %}
+    </ul>
+    <a href="{% url 'listar_alumnos' %}" class="btn-back">Volver a la Lista de Alumnos</a>
+  </div>
+{% endblock %}
+<style>
+  .statistics-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    text-align: center;
+  }
+
+  .statistics-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .statistics-list li {
+    margin: 10px;
+    padding: 8px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+  }
+
+  .btn-back {
+    background-color: #ccc;
+    color: #000;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+</style>

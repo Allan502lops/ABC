@@ -1,0 +1,85 @@
+{% block content %}
+  <div class="students-container">
+    <h1>Lista de Alumnos</h1>
+    <a class="btn-add" href="{% url 'agregar_alumno' %}">Agregar Alumno</a>
+    <ul class="students-list">
+      {% for alumno in alumnos %}
+        <li>
+          {{ alumno.nombres }} {{ alumno.apellidos }} - {{ alumno.carnet }}
+          <a class="btn-edit" href="{% url 'editar_alumno' id=alumno.id %}">Editar</a>
+          <form method="post" action="{% url 'eliminar_alumno' id=alumno.id %}" style="display: inline;">
+            {% csrf_token %}
+            <button class="btn-delete" type="submit">Eliminar</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+    <a class="btn-stats" href="{% url 'estadisticas_edad' %}">Ver Estadísticas</a>
+  </div>
+{% endblock %}
+
+<style>
+
+
+.students-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  text-align: center;
+}
+
+.students-list {
+  list-style: none;
+  padding: 0;
+}
+
+.students-list li {
+  margin: 10px;
+  padding: 8px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+
+.btn-edit {
+  background-color: #4caf50;
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.btn-delete {
+  background-color: #ff0000;
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.btn-add {
+  background-color: #2196f3;
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.btn-stats {
+  background-color: #4caf50;
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+</style>

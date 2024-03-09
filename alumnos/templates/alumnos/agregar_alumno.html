@@ -1,0 +1,89 @@
+
+
+{% block content %}
+  <style>
+    .form-container {
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .btn-submit {
+      background-color: #4285f4;
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      display: inline-block;
+      cursor: pointer;
+    }
+  </style>
+
+  <div class="form-container">
+    <form method="post" action="{% url 'agregar_alumno' %}">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label class="form-label" for="{{ form.carnet.id_for_label }}">Carnet:</label>
+        {{ form.carnet }}
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="{{ form.nombres.id_for_label }}">Nombres:</label>
+        {{ form.nombres }}
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="{{ form.apellidos.id_for_label }}">Apellidos:</label>
+        {{ form.apellidos }}
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="{{ form.correo.id_for_label }}">Correo:</label>
+        {{ form.correo }}
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="{{ form.fecha_nacimiento.id_for_label }}">Fecha de Nacimiento:</label>
+        {{ form.fecha_nacimiento }}
+      </div>
+
+      <button class="btn-submit" type="submit">Agregar Alumno</button>
+    </form>
+  </div>
+
+  <script>
+    document.querySelector('form').addEventListener('submit', function (event) {
+      var carnet = document.getElementById('{{ form.carnet.id_for_label }}').value.trim();
+      var nombres = document.getElementById('{{ form.nombres.id_for_label }}').value.trim();
+      var apellidos = document.getElementById('{{ form.apellidos.id_for_label }}').value.trim();
+      var correo = document.getElementById('{{ form.correo.id_for_label }}').value.trim();
+      var fechaNacimiento = document.getElementById('{{ form.fecha_nacimiento.id_for_label }}').value.trim();
+
+      if (!carnet || !nombres || !apellidos || !correo || !fechaNacimiento) {
+        alert('Por favor, complete todos los campos.');
+        event.preventDefault();
+      }
+    });
+  </script>
+{% endblock %}
